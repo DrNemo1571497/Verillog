@@ -1,3 +1,5 @@
+//Testbench for pattern.v
+
 module tb;
 reg x,RST, CLK;
 wire y;
