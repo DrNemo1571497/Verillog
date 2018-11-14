@@ -1,3 +1,5 @@
+//Verilog code to detect 1101 pattern
+
 module patt(x,y,CLK,RST);  
 input x,CLK,RST;  
 output y;  
