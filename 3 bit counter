@@ -1,0 +1,49 @@
+/*
+4-bit synchronous up counter.
+active high, synchronous reset.
+Active high enable.
+*/
+
+module counter(clk, rst, en, count);
+  
+  input clk, rst, en;
+  output reg [3:0] count;
+  
+  always @(posedge clk) begin
+    if(rst == 1)
+      begin
+        count <= #1 4'b0000;
+      end
+  else if(en == 1)
+    begin
+      count <= #1 count + 1;
+    end
+  end
+endmodule
+  
+  
+  // Code your testbench here
+// or browse Examples
+
+module tb;
+  
+  reg rst, clk, en;
+  wire [3:0] count;
+  
+  counter dut(clk, rst, en, count);
+  
+  always #5 clk = ~clk;
+  
+  initial begin
+    $display("time\t clk  rst  en  count");
+    $monitor("%g\t %b  %b  %b  %b", $time, clk, rst, en, count);
+    
+    {clk, rst, en} <= 0;
+    
+    #5 rst <= 1;
+    #10 rst <= 0;
+    #10 en <= 1;
+    #100 en <= 0;
+    #5 $finish;
+  end
+endmodule
