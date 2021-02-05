@@ -1,0 +1,42 @@
+// Code your design here
+
+
+module dff(d, clk, q, qbar);
+  input d, clk;
+  output reg q;
+  output reg qbar;
+  
+  always @(posedge clk)
+    begin
+      q <= d;
+      qbar <= !d;
+    end
+endmodule
+
+
+
+// Code your testbench here
+
+module tb;
+  reg t_d, t_clk;
+  wire t_q, t_qbar;
+  integer i;
+  
+  always #10 t_clk = ~t_clk;
+  
+  dff dut(t_d, t_clk, t_q, t_qbar);
+  
+  initial begin
+    {t_d, t_clk} <= 0;
+    
+    $monitor("clk = %b, d = %b, q = %b. qbar = %b", t_clk, t_d, t_q, t_qbar);
+    
+    for(i = 0; i < 10; i++)begin
+      #10 t_d <= $random;
+    $dumpfile("dump.vcd");
+    $dumpvars;
+  end
+  
+  #20 $finish;
+  end
+endmodule
