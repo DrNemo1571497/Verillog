@@ -1,0 +1,97 @@
+module addbit(
+				a,
+				b,
+				ci,
+				sum,
+  				co
+);
+  
+  input a;
+  input b;
+  input ci;
+  output wire sum;
+  output wire co;
+  
+  assign {co, sum} = a + b + ci;
+  
+endmodule
+
+module add4bit(
+  				result,
+  				carry,
+  				num1,
+  				num2,
+  				c_in
+);
+  
+  input wire [3:0] num1;
+  input wire [3:0] num2;
+  input wire c_in;
+  
+  output wire [3:0] result;
+  output wire carry;
+  
+  wire c1, c2, c3;
+  
+  
+  addbit u1(
+    .a(num1[0]),
+       .b(num2[0]),
+       .ci(c_in),
+       .sum(result[0]),
+       .co(c1)
+      );
+    
+    addbit u2(
+      .a(num1[1]),
+      .b(num2[1]),
+            .ci(c1),
+            .sum(result[1]),
+            .co(c2)
+           );
+         
+         addbit u3(
+           .a(num1[2]),
+              .b(num2[2]),
+              .ci(c2),
+              .sum(result[2]),
+              .co(c3)
+             );
+           
+           addbit u4(
+             .a(num1[3]),
+                .b(num2[3]),
+                .ci(c3),
+                .sum(result[3]),
+                .co(carry)
+               );
+endmodule
+
+
+//TESTBENCH
+
+module tb;
+  reg [3:0] t_num1, t_num2;
+  reg t_ci;
+  wire [3:0] t_sum;
+  wire t_co;
+  
+  add4bit dut(
+    .num1(t_num1), .num2(t_num2), .c_in(t_ci), .result(t_sum), .carry(t_co));
+  
+  initial begin
+    {t_num1, t_num2, t_ci} = 0;
+    #10
+    t_num1 = 10;
+    #10 t_num2 = 8;
+    #10 t_ci = 1;
+    #10 $finish;
+  end
+  
+  initial begin
+    
+    $display("num1   num2   ci   u0sum  u1sum  u2sum  u3sum u4sum  carry");
+    $monitor("%h   %h   %h   %h    %h    %h    %h   %h", t_num1, t_num2, t_ci, tb.dut.u1.sum, tb.dut.u2.sum, tb.dut.u3.sum, tb.dut.u4.sum, t_co);
+ 
+  end
+endmodule
