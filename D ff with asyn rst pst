@@ -1,0 +1,44 @@
+module dff(clk, d, rst, pst, q);
+  
+  input clk, d, rst, pst;
+  output reg q;
+  
+  always @ (posedge clk or posedge rst or posedge pst)
+    if(rst) begin
+      q <= 0;
+    end
+  else if (pst) begin
+    q <= 1;
+  end
+  else
+    q <= d;
+endmodule
+
+
+module tb;
+  
+  reg clk, d, rst, pst;
+  wire q;
+  
+  dff(clk, d, rst, pst, q);
+  
+  always #10 clk = ~clk;
+  
+  initial begin
+    $monitor("CLK = %b RESET = %b PRESET = %b D = %b Q = %b",
+   clk,rst,pst,d,q);
+    clk = 0;
+    #1 rst = 0;
+    pst = 0;
+    d = 0;
+    #1 rst = 1;
+    #2 rst = 0;
+    #2 pst = 1;
+    #2 pst = 0;
+    
+    repeat (4) begin
+      #2 d = ~d;
+    end
+    #200 $finish;
+  end
+endmodule
