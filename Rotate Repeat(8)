@@ -1,0 +1,16 @@
+module rotate();
+  reg [15:0] data;
+  
+  always @ (data)
+    begin
+      #1 data = data << 8;
+    end
+  
+  initial begin 
+    $display("DATA");
+    $monitor("%g %b", $time,  data);
+    
+    #2 data = 18'hF0;
+    #3 $finish;
+  end
+endmodule 
