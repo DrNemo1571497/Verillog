@@ -1,0 +1,35 @@
+module test(in1, in2, out);
+ 	
+		input in1, in2;
+  		output reg out;
+  wire w1;
+  
+  nand(w1, in1, in2);
+  not(out, w1);
+  
+endmodule
+
+
+
+module tb();
+  
+  reg t_in1, t_in2;
+  wire t_out;
+  integer i;
+  
+  test dut(t_in1, t_in2, t_out);
+  
+  initial begin
+    {t_in1, t_in2} = 0;
+    
+    $monitor("in1 = %b  in2 = %b  out = %b", t_in1, t_in2, t_out);
+    
+    #10
+    for(i = 0; i < 10; i++)begin
+      #1 t_in1 = $random;
+      #1 t_in2 = $random;
+    end
+    
+    #20 $finish;
+  end
+    endmodule
