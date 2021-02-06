@@ -1,0 +1,34 @@
+module mux(sel, in1, in2, out);
+  input reg in1, in2, sel;
+  output wire out;
+  
+  assign out = (sel) ? in2 : in1;
+  
+endmodule
+
+
+
+module tb;
+  reg in1, in2, sel; 
+  wire out;
+  integer i;
+  
+  mux tb(sel, in1, in2, out);
+  
+  initial begin
+    $monitor("Time = %g SEL = %b in1 = %b in2 = %b out = %b", $time, sel, in1, in2, out);
+    
+    {sel, in1, in2} = 0;
+    for(i = 0; i < 5; i++) begin
+      #1 in1 = $random;
+      #1 in2 = $random;	
+    end
+    #1 sel = 1;
+    for(i = 0; i < 5; i++)begin
+      #1 in1 = $random;
+      #1 in2 = $random;
+    end
+  end
+endmodule
+    
+    
