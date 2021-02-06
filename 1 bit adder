@@ -1,0 +1,31 @@
+
+module one_bit_adder(in1, in2, sum, carry);
+  input in1, in2;
+  output wire sum, carry;
+  
+  assign {carry, sum} = in1 + in2;
+  
+endmodule
+
+
+
+module tb;
+  reg in1, in2;
+  wire carry, sum;
+  integer i;
+  
+  one_bit_adder dut(in1, in2, sum, carry);
+  
+  initial begin
+    $monitor("@%g in1 = %b, in2 = %b, sum = %b, carry = %b", $time, in1, in2, sum, carry);
+    
+    {in1, in2} = 0;
+    for(i = 0; i < 10; i++)begin
+    #10 in1 = $random;
+    #10 in2 = $random;
+    end
+    
+    #100;
+    $finish;
+  end
+endmodule
