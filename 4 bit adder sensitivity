@@ -1,0 +1,33 @@
+module one_bit_adder(in1, in2, sum, carry);
+  
+  input reg [3:0] in1, in2;
+  output reg [3:0]sum;
+  output reg carry;
+  
+  always @(in1 or in2) begin
+    {carry, sum} = in1 + in2;
+  end
+endmodule
+      
+      
+      
+      module tb;
+  reg [3:0] in1, in2; 
+  wire [3:0] sum;
+  wire carry;
+  integer i;
+  
+  one_bit_adder(in1, in2, sum, carry);
+  
+  initial begin
+    {in1, in2} = 0;
+    $monitor("in1 = %b, in2 = %b, sum = %b carry = %b", in1, in2, sum, carry);
+    
+    for(i = 0; i < 10; i++) begin
+    
+      #10 in1 = $random;
+      #10 in2 = $random;
+    end
+    #10 $finish;
+  end
+endmodule
