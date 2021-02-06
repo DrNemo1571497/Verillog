@@ -9,7 +9,7 @@ module detect_1();
   for(i = 0; i < 32; i++)begin
     if(num[i] == 1)begin
       position = i;
-  	  disable DETECT;
+  	  disable DETECT;                 //break;
     end
     else begin
       position = 32;
