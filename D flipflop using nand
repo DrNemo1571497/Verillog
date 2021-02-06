@@ -1,0 +1,40 @@
+module test(clk, d, q, qbar);
+ 	
+		input clk, d;
+  		output reg q, qbar;
+  wire x, y;
+  
+  nand(x, d, clk);
+  nand(y, x, clk);
+  nand(q, x, qbar);
+  nand(qbar, y, q);
+  not(out, w1);
+  
+endmodule
+
+
+
+module tb();
+  
+  reg t_clk, t_d;
+  wire t_q, t_qbar;
+  integer i;
+  
+  test dut(t_clk, t_d, t_q, t_qbar);
+  
+  
+  
+  initial begin
+    {t_clk, t_d} = 0;
+    
+    $monitor("t_clk = %b  t_d = %b  t_q = %b  t_qbar = %b", t_clk, t_d, t_q, t_qbar);
+    
+    #10
+    for(i = 0; i < 10; i++)begin
+      #1 t_clk = $random;
+      #1 t_d = $random;
+    end
+    
+    #20 $finish;
+  end
+    endmodule
