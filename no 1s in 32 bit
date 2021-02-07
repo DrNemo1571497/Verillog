@@ -1,0 +1,19 @@
+module reverse();
+  reg [31:0] num;
+  reg [31:0] rev_num;
+  
+  integer i;
+  initial begin
+    num = 32'b1111_0000_1111_1111_0000_1111_0000_1111;
+    for(i=31; i >=0; i= i-1)begin
+      rev_num[31-i] = num[i];
+  end
+  end
+  
+  initial begin
+    $display("num = %b |||||| rev_num = %b", num, rev_num);
+    #10 $finish;
+  end 
+endmodule
+
+  
