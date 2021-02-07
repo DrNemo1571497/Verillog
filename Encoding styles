@@ -1,0 +1,21 @@
+//One Hot
+
+parameter  [4:0]  IDLE  = 5'b0_0001;
+parameter  [4:0]  GNT0  = 5'b0_0010;
+parameter  [4:0]  GNT1  = 5'b0_0100;
+parameter  [4:0]  GNT2  = 5'b0_1000;
+parameter  [4:0]  GNT3  = 5'b1_0000;
+
+//binary
+parameter  [2:0]  IDLE  = 3'b000;
+parameter  [2:0]  GNT0  = 3'b001;
+parameter  [2:0]  GNT1  = 3'b010;
+parameter  [2:0]  GNT2  = 3'b011;
+parameter  [2:0]  GNT3  = 3'b100;
+
+//gray
+parameter  [2:0]  IDLE  = 3'b000;
+parameter  [2:0]  GNT0  = 3'b001;
+parameter  [2:0]  GNT1  = 3'b011;
+parameter  [2:0]  GNT2  = 3'b010;
+parameter  [2:0]  GNT3  = 3'b110;
