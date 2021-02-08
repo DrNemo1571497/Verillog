@@ -1,0 +1,22 @@
+module q_lifo();
+  string lifo[$];
+  
+  initial begin
+    lifo.push_back("A");
+    $display("%p", lifo);
+    
+    lifo.push_back("B");
+    $display("%p", lifo);
+    
+    lifo.push_back("C");
+    $display("%p", lifo);
+    
+    lifo.push_back("D");
+    $display("%p", lifo);
+    
+    lifo.pop_back();
+    $display("%p", lifo);
+    
+  end
+endmodule
+    
