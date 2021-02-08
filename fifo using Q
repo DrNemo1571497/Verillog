@@ -1,0 +1,26 @@
+module q_fifo();
+  
+  string fifo[$];
+  
+  initial begin
+    fifo.push_back("A");
+    $display("%p", fifo);
+    
+    fifo.push_back("B");
+    $display("%p", fifo);
+    
+    fifo.push_back("C");
+    $display("%p", fifo);
+    
+    fifo.push_back("D");
+    $display("%p", fifo);
+    
+    fifo.push_back("E");
+    $display("%p", fifo);
+    
+    
+    fifo.pop_front();
+    $display("%p", fifo);
+    
+  end
+endmodule
