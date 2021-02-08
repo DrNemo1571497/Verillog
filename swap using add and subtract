@@ -1,0 +1,12 @@
+module test();
+	reg a, b;
+  
+  initial begin
+    a = 1;
+    b = 0;
+  a = a + b;
+  b = a - b;
+  a = a + b;
+    $display("a = %b     b = %b", a, b);
+  end 
+endmodule
