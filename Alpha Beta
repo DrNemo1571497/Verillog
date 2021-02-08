@@ -1,0 +1,15 @@
+module test();
+  int alpha, beta;
+  
+  initial begin
+    alpha <= 4; 
+    beta = 3;
+    
+    beta <= beta + alpha;
+    alpha <= alpha + beta;
+    
+    alpha = alpha - 1;
+   
+    $display("Alpha = %d    Beta = %d", alpha, beta);
+  end
+endmodule
