@@ -1,0 +1,18 @@
+module tb;
+  
+  int a[];
+  
+  initial begin
+    a = new[5];
+    
+    a = '{31, 45, 78, 23, 56};
+    
+    a = new[a.size() + 1](a);
+    
+    a[a.size() - 1] = 89;
+    
+    foreach(a[i])
+      $display("%d", a[i]);
+
+  end
+endmodule
