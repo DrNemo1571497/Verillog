@@ -1,0 +1,18 @@
+module tb;
+
+int array1 [int];
+int array2 [string];
+
+initial begin
+  
+  array1 = '{1:56,
+             2:89};
+  
+  array2 = '{"a" : 100,
+             "b" : "Orange"};
+  
+  $display("%p", array1);
+  $display("%p", array2);
+  
+end
+endmodule
